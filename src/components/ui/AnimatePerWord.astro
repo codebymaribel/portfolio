@@ -1,0 +1,26 @@
+---
+interface Props {
+  text: string;
+  className?: string;
+  id?: string;
+}
+
+const { text, className, id } = Astro.props;
+
+const words = text.split(" ");
+---
+
+<div id={id} class={`flex flex-wrap gap-x-[0.3em] ${className}`}>
+  {
+    words.map((word, index) => (
+      <div class="overflow-hidden py-1">
+        <span
+          class="block translate-y-[110%] opacity-0 will-change-transform"
+          data-animate-word
+        >
+          {word}
+        </span>
+      </div>
+    ))
+  }
+</div>

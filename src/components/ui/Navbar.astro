@@ -1,0 +1,101 @@
+---
+import { Moon, Sun, Code, Languages } from "lucide-react";
+
+const navItems = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Services", href: "#services" },
+  { name: "Contact", href: "#contact" },
+];
+
+const { pathname } = Astro.url;
+const currentLang = pathname.startsWith("/es") ? "es" : "en";
+
+const toggleHref =
+  currentLang === "en"
+    ? pathname.replace("/en", "/es") || "/es"
+    : pathname.replace("/es", "/en") || "/en";
+---
+
+<header
+  class="relative border-b border-neutral-200 dark:border-neutral-800 px-8 py-6 bg-light dark:bg-dark transition-colors duration-300"
+>
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex flex-row items-center justify-start gap-2">
+      <Code
+        className="text-dark dark:text-light transition-transform group-hover:-rotate-12"
+      />
+      <div class="flex flex-col justify-start">
+        <span class="text-dark dark:text-light font-bold text-sm">
+          @codebymaribel
+        </span>
+        <div
+          class="text-xs
+          text-neutral-500
+          dark:text-neutral-400 ml-2"
+        >
+          Based in Venezuela
+        </div>
+      </div>
+    </div>
+
+    <nav
+      class="hidden lg:flex items-center gap-4 text-neutral-500 dark:text-neutral-400 text-sm"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm uppercase  text-zinc-400 hover:text-dark dark:hover:text-light transition-colors"
+          >
+            {item.name}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-10">
+      <a
+        href={toggleHref}
+        class="flex items-end justify-end gap-1 text-xs font-bold uppercase text-neutral-500 hover:text-lime-500 transition-colors"
+      >
+        <Languages size={14} />
+        {currentLang === "en" ? "ES" : "EN"}
+      </a>
+      <button
+        id="theme-toggle"
+        class="bg-lime-400 rounded-full p-2 hover:bg-lime-300 transition-all active:scale-95"
+        aria-label="Toggle Dark Mode"
+      >
+        <div id="sun-icon" class="hidden dark:block">
+          <Sun
+            size={16}
+            className="text-dark transition-transform group-hover:-rotate-12"
+          />
+        </div>
+        <div id="moon-icon" class="block dark:hidden">
+          <Moon
+            size={16}
+            className="text-dark transition-transform group-hover:-rotate-12"
+          />
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    element.classList.toggle("dark");
+
+    const isDark = element.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    const toggle = document.getElementById("theme-toggle");
+    toggle?.addEventListener("click", handleToggleClick);
+  });
+</script>

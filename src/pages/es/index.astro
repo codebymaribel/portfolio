@@ -1,0 +1,82 @@
+---
+import AnimatePerWord from "../../components/ui/AnimatePerWord.astro";
+import Navbar from "../../components/ui/Navbar.astro";
+import { ui } from "../../content/i18n";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const lang = "es";
+const t = ui[lang];
+---
+
+<MainLayout title="Creative Apes | Portfolio">
+  <Navbar />
+
+  <main class="relative w-full min-h-screen bg-dark overflow-hidden">
+    <section
+      class="min-h-screen flex flex-col justify-center px-8 py-20 relative"
+    >
+      <div class="max-w-7xl mx-auto w-full">
+        {/* Main Headline */}
+        <div class="mb-12">
+          <h1 class="text-9xl font-bold text-white leading-none mb-4">
+            Maribel{" "}
+            <br />
+            <span class="relative"> Hernandez </span>
+          </h1>
+          <AnimatePerWord
+            id="animate-subtitle"
+            text={t["hero.subtitle"]}
+            className="text-neutral-500 text-6xl"
+          />
+        </div>
+
+        {/* Subtitle and Location */}
+        <div class="flex justify-between items-end">
+          <div>
+            <p class="text-neutral-500 text-lg">
+              {t["hero.jobTitle"]}
+            </p>
+          </div>
+          <div>
+            <p class="text-neutral-500 text-right">{t["hero.location"]}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div
+      class="w-[500px] h-[500px] bg-lime-500/10 rounded-full blur-[100px] absolute -z-10"
+    >
+    </div>
+    <section
+      class="min-h-screen flex flex-col justify-center px-8 py-20 relative"
+    >
+      {/* Work Section */}
+      <div class="grid grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-6xl font-bold text-white mb-4">
+            WORK
+            <br />
+            ABOUT
+          </h2>
+        </div>
+        <div class="text-neutral-600 leading-relaxed">
+          <p>
+            We're a creative design and development studio based in India,
+            working with brands across branding, UI/UX, motion, and interactive
+            web experiences. Our focus is delivering smart, seamless solutions
+            that push boundaries and create meaningful impact.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+  >
+    <span class="text-[10px] uppercase tracking-[0.2em] text-zinc-500"
+      >Scroll</span
+    >
+    <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+  </div>
+</MainLayout>
